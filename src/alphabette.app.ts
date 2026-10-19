@@ -8,7 +8,7 @@ import type { AlphaAppConfig } from '@alphabette/shell';
 export const APP: AlphaAppConfig = {
   key: 'frigoplacard',
   name: 'Frigo-Placard',
-  tagline: 'Zéro gaspi, plein d'idées',
+  tagline: 'Zéro gaspi, plein d\u2019idées',
 
   // Couleur d'identité du site : toute la base s'y adapte.
   accent: '#0CA678',

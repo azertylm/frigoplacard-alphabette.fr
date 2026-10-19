@@ -1,0 +1,31 @@
+{
+  "name": "Frigo-Placard",
+  "short_name": "Frigo-Placard",
+  "description": "L'application anti-gaspi de l'écosystème alphabette.fr : garde-manger, recettes, Chef Mistral, courses et batch cooking.",
+  "lang": "fr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b1220",
+  "theme_color": "#0CA678",
+  "icons": [
+    {
+      "src": "/frigoplacard-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/frigoplacard-icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Mon frigo", "url": "/?onglet=frigo" },
+    { "name": "Recettes", "url": "/?onglet=recettes" },
+    { "name": "Chef IA", "url": "/?onglet=ia" }
+  ]
+}

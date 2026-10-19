@@ -1,0 +1,982 @@
+/*
+ * app.css — la charte Frigo-Placard.
+ *
+ * Règle nº 3 de l'écosystème : AUCUNE couleur codée en dur. Tout dérive des
+ * variables --ab-* de la base commune, elles-mêmes dérivées de l'accent
+ * d'identité (src/alphabette.app.ts). Thème nuit via [data-ab-theme='nuit'],
+ * densité via [data-ab-density] : la base s'occupe de tout.
+ */
+
+/* -------------- Fondations -------------- */
+
+.frigoplacard-root {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+.fp-contenu {
+  max-width: 58rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+  color: var(--ab-ink);
+}
+
+.fp-pied {
+  border-top: 1px solid var(--ab-border);
+  color: var(--ab-muted);
+  font-size: 0.85rem;
+  max-width: 58rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.fp-pied a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+h1, h2, h3 {
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  line-height: 1.2;
+}
+
+/* -------------- Navigation à onglets -------------- */
+
+.fp-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  max-width: 58rem;
+  margin: 0.5rem auto 0;
+  padding: 0.5rem 1rem;
+}
+
+.fp-nav-onglet {
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  color: var(--ab-ink);
+  border-radius: 999px;
+  padding: 0.65rem 1.1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.fp-nav-onglet--actif {
+  background: var(--ab-accent);
+  border-color: var(--ab-accent);
+  color: #fff;
+}
+
+/* -------------- Menu latéral -------------- */
+
+.fp-menu {
+  background: var(--ab-surface);
+  border: 1px solid var(--ab-border);
+  border-radius: 1rem;
+  margin: 0.75rem auto 0;
+  max-width: 58rem;
+  padding: 1rem;
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.fp-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fp-menu ul button {
+  border: none;
+  background: transparent;
+  color: var(--ab-ink);
+  font: inherit;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.5rem;
+  min-height: 40px;
+  text-align: left;
+}
+
+.fp-menu ul button.actif {
+  background: var(--ab-chip);
+  font-weight: 700;
+}
+
+.fp-menu-liens {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fp-menu-liens a {
+  color: var(--ab-muted);
+}
+
+/* -------------- Panneaux -------------- */
+
+.fp-panneau {
+  background: var(--ab-surface);
+  border: 1px solid var(--ab-border);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  margin: 1rem auto;
+}
+
+.fp-panneau-tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.fp-panneau-tete h2 {
+  margin: 0;
+}
+
+.fp-soustitre {
+  color: var(--ab-muted);
+  font-size: 0.9rem;
+  max-width: 32rem;
+}
+
+.fp-vide {
+  background: var(--ab-chip);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: var(--ab-ink);
+}
+
+.fp-note {
+  color: var(--ab-muted);
+  font-size: 0.85rem;
+}
+
+.fp-lien {
+  background: none;
+  border: none;
+  color: var(--ab-accent);
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.fp-lien--rouge {
+  color: var(--ab-warn);
+}
+
+/* -------------- Saisie & boutons tactiles -------------- */
+
+.fp-saisie {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0;
+}
+
+.fp-champ {
+  border: 1px solid var(--ab-border);
+  background: var(--ab-bg);
+  color: var(--ab-ink);
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  flex: 1 1 auto;
+  min-width: 9rem;
+  min-height: 48px;
+}
+
+.fp-champ--qte {
+  flex: 0 0 6rem;
+  min-width: 6rem;
+}
+
+.fp-champ--unite {
+  flex: 0 0 8rem;
+  min-width: 8rem;
+}
+
+.fp-bouton {
+  border: 1px solid var(--ab-border);
+  background: var(--ab-chip);
+  color: var(--ab-ink);
+  border-radius: 999px;
+  padding: 0.7rem 1.1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 48px;
+}
+
+.fp-bouton:hover {
+  background: var(--ab-chip-hover);
+}
+
+.fp-bouton--primaire {
+  background: var(--ab-accent);
+  border-color: var(--ab-accent);
+  color: #fff;
+}
+
+.fp-bouton--danger {
+  border-color: var(--ab-warn);
+  color: var(--ab-warn);
+}
+
+.fp-bouton--fantome {
+  background: transparent;
+}
+
+/* -------------- Puces (filtres) -------------- */
+
+.fp-puces,
+.fp-filtres,
+.fp-ligne-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+}
+
+.fp-puce {
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  color: var(--ab-ink);
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  font: inherit;
+  cursor: pointer;
+  min-height: 40px;
+}
+
+.fp-puce--active {
+  background: color-mix(in srgb, var(--ab-accent) 18%, var(--ab-surface));
+  border-color: var(--ab-accent);
+  font-weight: 700;
+}
+
+/* -------------- Garde-manger -------------- */
+
+.fp-alerte {
+  background: color-mix(in srgb, var(--ab-warn) 15%, var(--ab-surface));
+  border: 1px solid color-mix(in srgb, var(--ab-warn) 40%, var(--ab-border));
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0;
+}
+
+.fp-produits {
+  list-style: none;
+  margin: 0.75rem 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fp-produit {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  background: var(--ab-bg);
+  border: 1px solid var(--ab-border);
+  border-radius: 0.9rem;
+  padding: 0.65rem 0.9rem;
+}
+
+.fp-produit-nom {
+  flex: 1 1 10rem;
+}
+
+.fp-produit-qte {
+  color: var(--ab-muted);
+}
+
+.fp-produit-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.pastille-ru {
+  display: none;
+}
+
+.fp-pastille {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.fp-pastille span {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.fp-pastille--vert {
+  background: color-mix(in srgb, var(--ab-ok) 16%, var(--ab-surface));
+  color: color-mix(in srgb, var(--ab-ok) 80%, var(--ab-ink));
+}
+
+.fp-pastille--orange {
+  background: color-mix(in srgb, var(--ab-warn) 16%, var(--ab-surface));
+  color: var(--ab-warn);
+}
+
+.fp-pastille--rouge {
+  background: color-mix(in srgb, var(--ab-don) 16%, var(--ab-surface));
+  color: var(--ab-don);
+}
+
+.fp-stat-impact {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: var(--ab-muted);
+  font-size: 0.9rem;
+}
+
+.fp-impact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+
+.fp-impact-carte {
+  background: color-mix(in srgb, var(--ab-accent) 10%, var(--ab-surface));
+  border: 1px solid color-mix(in srgb, var(--ab-accent) 30%, var(--ab-border));
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fp-impact-carte strong {
+  font-size: 1.4rem;
+  font-family: 'Syne', sans-serif;
+}
+
+/* -------------- Blocs ---------------------- */
+
+.fp-bloc {
+  background: var(--ab-bg);
+  border: 1px solid var(--ab-border);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.fp-bloc h3 {
+  margin: 0 0 0.5rem;
+}
+
+.fp-bloc-tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fp-astuce {
+  background: color-mix(in srgb, var(--ab-pass) 12%, var(--ab-surface));
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.fp-restes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.5rem;
+}
+
+.fp-reste {
+  background: var(--ab-surface);
+  border: 1px solid var(--ab-border);
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.8rem;
+}
+
+.fp-reste summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* -------------- Cartes recettes -------------- */
+
+.fp-recettes {
+  list-style: none;
+  margin: 0.75rem 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 0.75rem;
+}
+
+.fp-carte,
+.fp-carte-tete {
+  cursor: pointer;
+}
+
+.fp-carte {
+  background: var(--ab-surface);
+  border: 1px solid var(--ab-border);
+  border-radius: 1rem;
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 150ms ease;
+}
+
+.fp-carte:hover {
+  border-color: var(--ab-accent);
+}
+
+.fp-carte-tete {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fp-emoji {
+  font-size: 1.6rem;
+}
+
+.fp-carte-favori {
+  color: var(--ab-pass);
+}
+
+.fp-badges {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  color: var(--ab-muted);
+  font-size: 0.82rem;
+}
+
+.fp-badges span {
+  background: var(--ab-chip);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+}
+
+.fp-badges-rouge {
+  color: var(--ab-don) !important;
+}
+
+.fp-badges--fetes,
+.fp-badge-fetes {
+  background: color-mix(in srgb, var(--ab-pass) 20%, var(--ab-surface)) !important;
+  color: var(--ab-ink);
+}
+
+.fp-badge-ia {
+  background: color-mix(in srgb, var(--ab-accent) 15%, var(--ab-surface));
+  border: 1px solid color-mix(in srgb, var(--ab-accent) 35%, var(--ab-border));
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.82rem;
+}
+
+/* -------------- Fiche recette (overlay) -------------- */
+
+.fp-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: color-mix(in srgb, var(--ab-ink) 55%, transparent);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.fp-fiche {
+  background: var(--ab-surface);
+  color: var(--ab-ink);
+  border-radius: 1.25rem;
+  max-width: 42rem;
+  width: 100%;
+  border: 1px solid var(--ab-border);
+}
+
+.fp-fiche-tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.fp-fiche-tete h2 {
+  margin: 0 0 0.4rem;
+}
+
+.fp-fiche-actions-haut {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.fp-favori,
+.fp-fermer {
+  border: 1px solid var(--ab-border);
+  background: var(--ab-chip);
+  border-radius: 999px;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--ab-ink);
+}
+
+.fp-favori {
+  color: var(--ab-pass);
+}
+
+.fp-fiche-corps {
+  padding: 1rem 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fp-portions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.fp-portions-cran {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  color: var(--ab-ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.fp-portions-active {
+  background: var(--ab-accent);
+  border-color: var(--ab-accent);
+  color: #fff;
+}
+
+.fp-ingredients {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fp-ingredients li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  border-bottom: 1px dashed var(--ab-border);
+  padding-bottom: 0.35rem;
+}
+
+.fp-ingredients-nom {
+  font-weight: 600;
+}
+
+.fp-ingredients-qte {
+  color: var(--ab-muted);
+}
+
+.fp-manquant {
+  opacity: 0.95;
+}
+
+.fp-substituer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+  font-size: 0.85rem;
+}
+
+.fp-substituer-liste {
+  list-style: none;
+  padding: 0.25rem 0 0 0.5rem;
+  margin: 0;
+  color: var(--ab-muted);
+}
+
+.fp-etapes {
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fp-etapes li {
+  min-height: 2.75rem;
+}
+
+.fp-bloc-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.fp-bloc-actions .fp-etoiles {
+  margin-left: auto;
+}
+
+.fp-toast {
+  background: color-mix(in srgb, var(--ab-ok) 16%, var(--ab-surface));
+  border: 1px solid color-mix(in srgb, var(--ab-ok) 40%, var(--ab-border));
+  border-radius: 0.75rem;
+  color: color-mix(in srgb, var(--ab-ok) 70%, var(--ab-ink));
+  padding: 0.6rem 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* -------------- Minuteur -------------- */
+
+.fp-minuteur {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  color: var(--ab-ink);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.fp-minuteur--compact {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+.fp-minuteur--courant {
+  border-color: var(--ab-accent);
+  color: var(--ab-accent);
+  background: color-mix(in srgb, var(--ab-accent) 12%, var(--ab-surface));
+}
+
+/* -------------- Étoiles -------------- */
+
+.fp-etoiles {
+  display: inline-flex;
+  gap: 0.05rem;
+  color: var(--ab-pass);
+  font-size: 1.2rem;
+}
+
+.fp-etoiles--choix button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ab-pass);
+  padding: 0 0.15rem;
+  min-width: 2rem;
+  min-height: 2rem;
+}
+
+.fp-etoiles button.vide {
+  opacity: 0.45;
+}
+
+/* -------------- Mode cuisinier (plein écran) -------------- */
+
+.fp-cuisinier {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: var(--ab-bg);
+  color: var(--ab-ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.fp-cuisinier header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--ab-border);
+  color: var(--ab-muted);
+}
+
+.fp-cuisinier header span {
+  flex: 1;
+  text-align: center;
+}
+
+.fp-cuisinier-quitter,
+.fp-cuisinier footer button {
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  color: var(--ab-ink);
+  border-radius: 999px;
+  padding: 0.8rem 1.4rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 52px;
+}
+
+.fp-cuisinier footer button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.fp-cuisinier .fp-cuisinier-suivant {
+  background: var(--ab-accent);
+  border-color: var(--ab-accent);
+  color: #fff;
+}
+
+.fp-cuisinier-pas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.fp-cuisinier-pas p {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 3.2rem);
+  font-weight: 700;
+  max-width: 34ch;
+  margin: 0;
+}
+
+.fp-cuisinier footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-top: 1px solid var(--ab-border);
+}
+
+/* -------------- Quiz -------------- */
+
+.fp-quiz-choix {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fp-quiz-option {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  color: var(--ab-ink);
+  border-radius: 0.9rem;
+  padding: 0.9rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  min-height: 52px;
+}
+
+.fp-quiz-option:disabled {
+  cursor: default;
+}
+
+.fp-quiz-option--ok {
+  border-color: var(--ab-ok);
+  background: color-mix(in srgb, var(--ab-ok) 14%, var(--ab-surface));
+}
+
+.fp-quiz-option--ko {
+  border-color: var(--ab-don);
+  background: color-mix(in srgb, var(--ab-don) 12%, var(--ab-surface));
+}
+
+.fp-quiz-suivant {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+/* -------------- Courses & historique -------------- */
+
+.fp-achats {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fp-achat {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--ab-bg);
+  border: 1px solid var(--ab-border);
+  border-radius: 0.8rem;
+  padding: 0.6rem 0.9rem;
+}
+
+.fp-achat input[type='checkbox'] {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.fp-achat--achete {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.fp-achat span {
+  flex: 1;
+}
+
+.fp-plats {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fp-plats li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  background: var(--ab-bg);
+  border: 1px solid var(--ab-border);
+  border-radius: 0.8rem;
+  padding: 0.6rem 0.9rem;
+}
+
+.fp-plats li strong {
+  flex: 1 1 14rem;
+}
+
+.fp-plats li > span {
+  color: var(--ab-muted);
+  font-size: 0.85rem;
+}
+
+/* -------------- Utilitaires -------------- */
+
+.fp-btn-rouge { color: var(--ab-don); }
+
+/* -------------- Impression propre (règles @media print) -------------- */
+
+@media print {
+  html[data-ab-theme='nuit'] {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .ab-eco,
+  .ab-bar,
+  .ab-content,
+  .fp-nav,
+  .fp-menu,
+  .fp-contenu,
+  .fp-pied,
+  .fp-cuisinier {
+    display: none !important;
+  }
+
+  .fp-scene {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .fp-fiche {
+    max-width: none;
+    border: none;
+  }
+
+  .fp-fiche-actions-haut,
+  .fp-minuteur,
+  .fp-bloc-actions {
+    display: none !important;
+  }
+
+  .fp-bloc,
+  .fp-fiche,
+  .fp-ingredients li {
+    border-color: #ddd;
+  }
+}
+
+/* -------------- Densité & mobile -------------- */
+
+@media (max-width: 720px) {
+  .fp-fiche-tete {
+    flex-direction: column;
+  }
+
+  .fp-fiche-tete > div:first-child {
+    width: 100%;
+  }
+
+  .fp-cuisinier-pas p {
+    font-size: 1.5rem;
+  }
+
+  .fp-stat-impact {
+    font-size: 0.8rem;
+  }
+}
+
+/* La densité « large » de la base grossit TOUT le contenu : */
+html[data-ab-density='large'] .fp-contenu {
+  font-size: 1.05rem;
+}
+
+html[data-ab-density='compact'] .fp-contenu {
+  font-size: 0.92rem;
+}

@@ -3,14 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frigo-Placard — alphabette.fr</title>
+    <title>Frigo-Placard — zéro gaspi, plein d'idées</title>
     <meta
       name="description"
-      content="Zéro gaspi, plein d'idées — application de l'écosystème alphabette.fr."
+      content="Frigo-Placard — l'application anti-gaspi de l'écosystème alphabette.fr : garde-manger, recettes multicritères, Chef Mistral (IA souveraine), liste de courses et batch cooking."
+    />
+    <meta name="theme-color" content="#0CA678" />
+    <link rel="icon" href="/frigoplacard-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/frigoplacard-icon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
     />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // PWA : le service worker offre le mode hors-ligne (recettes locales).
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/frigoplacard_sw.js').catch(() => {
+            /* pas de SW : l'app reste fonctionnelle. */
+          });
+        });
+      }
+    </script>
   </body>
 </html>

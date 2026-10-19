@@ -1,0 +1,56 @@
+name: Déploiement — frigoplacard.alphabette.fr
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# GitHub Pages a besoin de ces permissions précises (deployment OIDC).
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul déploiement à la fois : le nouveau remplace l'ancien.
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Installer les dépendances
+        run: bun install --frozen-lockfile
+
+      - name: Lint (types)
+        run: bun run lint
+
+      - name: Construire l'application
+        run: bun run build
+
+      # GitHub Pages lit le CNAME depuis la racine du site publié.
+      - name: Déposer le CNAME
+        run: cp public/CNAME dist/CNAME
+
+      - name: Préparer l'artefact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deployer:
+    needs: construire
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publier sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
