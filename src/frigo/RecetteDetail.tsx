@@ -102,6 +102,8 @@ export function RecetteDetail({ recette, onClose }: { recette: Recette; onClose:
                 <span>🎚 {LIBELLES_NIVEAU[recette.niveau]}</span>
                 <span>🔥 {kcal} kcal/portion — {equilibre(kcal)}</span>
                 <span>⚖️≈ {Math.round(kg * part * 10) / 10} kg sauvés</span>
+                {recette.budget && <span>💰 {'€'.repeat(recette.budget)}</span>}
+                {recette.congelable && <span>❄️ congélable</span>}
                 {recette.restesFetes && <span className="fp-badge-fetes">🎉 restes de fêtes</span>}
               </div>
             </div>
@@ -161,6 +163,30 @@ export function RecetteDetail({ recette, onClose }: { recette: Recette; onClose:
                 <em>Sans alcool : {accordDe(recette.categorie).sansAlcool}.</em>
               </p>
             </section>
+
+            {(recette.conseil || recette.conservation) && (
+              <section className="fp-bloc">
+                <div className="fp-details-utiles">
+                  {recette.conseil && (
+                    <div className="fp-detail-utile">
+                      <strong>👨‍🍳 Conseil du chef</strong>
+                      <p>{recette.conseil}</p>
+                    </div>
+                  )}
+                  {recette.conservation && (
+                    <div className="fp-detail-utile">
+                      <strong>📦 Après le repas</strong>
+                      <p>
+                        {recette.conservation}{' '}
+                        <span className={`fp-congel${recette.congelable === false ? ' fp-congel--non' : ''}`}>
+                          {recette.congelable === false ? '❌ pas de congélation' : '❄️ congélable en parts'}
+                        </span>
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
 
             <section className="fp-bloc">
               <h3>🧑‍🍳 Étapes</h3>

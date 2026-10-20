@@ -497,6 +497,42 @@ h1, h2, h3 {
   font-size: 0.82rem;
 }
 
+/* Détails « niveau cuisine » : conseil du chef, conservation, congélation */
+.fp-details-utiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.75rem;
+}
+
+.fp-detail-utile {
+  background: color-mix(in srgb, var(--ab-pass) 10%, var(--ab-surface));
+  border: 1px solid color-mix(in srgb, var(--ab-pass) 30%, var(--ab-border));
+  border-radius: 0.9rem;
+  padding: 0.75rem 1rem;
+}
+
+.fp-detail-utile strong {
+  font-family: 'Syne', sans-serif;
+}
+
+.fp-detail-utile p {
+  margin: 0.35rem 0 0;
+  font-size: 0.92rem;
+}
+
+.fp-congel {
+  display: inline-block;
+  background: color-mix(in srgb, var(--ab-ok) 14%, var(--ab-surface));
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.fp-congel--non {
+  background: color-mix(in srgb, var(--ab-warn) 14%, var(--ab-surface));
+}
+
 /* -------------- Fiche recette (overlay) -------------- */
 
 .fp-scene {

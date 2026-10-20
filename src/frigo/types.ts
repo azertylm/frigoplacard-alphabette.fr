@@ -62,6 +62,15 @@ export interface Recette {
   etapes: Etape[];
   /** Vrai si la recette se sert d'un plat cuisiné pour anti-gaspi. */
   restesFetes?: boolean;
+  /* -------- Le niveau de détail « cuisine maison » -------- */
+  /** Le tour de main du chef, en une phrase. */
+  conseil?: string;
+  /** Combien de temps ça garde, et comment. */
+  conservation?: string;
+  /** Congelable ou pas (crucial pour le batch cooking). */
+  congelable?: boolean;
+  /** Coût approximatif du plat : 1 = ¤, 2 = ¤¤, 3 = ¤¤¤. */
+  budget?: 1 | 2 | 3;
 }
 
 /** Un produit du garde-manger (frigo + placard). */

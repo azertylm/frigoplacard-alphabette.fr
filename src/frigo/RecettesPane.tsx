@@ -138,6 +138,8 @@ export function RecettesPane() {
               <div className="fp-badges">
                 <span>⏱ {r.temps} min</span>
                 <span>🎚 {LIBELLES_NIVEAU[r.niveau]}</span>
+                {r.budget && <span>💰 {'€'.repeat(r.budget)}</span>}
+                {r.congelable && <span>❄️</span>}
                 <span>
                   🧺 {a.ok}/{a.total}
                   {filtres.frigoVide ? '' : ' ingrédients présents'}
