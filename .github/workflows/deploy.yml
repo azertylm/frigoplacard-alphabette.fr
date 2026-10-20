@@ -39,6 +39,13 @@ jobs:
       - name: Déposer le CNAME
         run: cp public/CNAME dist/CNAME
 
+      # Active Pages automatiquement (source : GitHub Actions) si ça n'a pas
+      # encore été fait à la main dans Settings → Pages.
+      - name: Configurer Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - name: Préparer l'artefact Pages
         uses: actions/upload-pages-artifact@v3
         with:
