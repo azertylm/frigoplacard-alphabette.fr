@@ -17,13 +17,15 @@ import { CoursesPane } from './frigo/CoursesPane';
 import { HistoriquePane } from './frigo/HistoriquePane';
 import { QuizPane } from './frigo/QuizPane';
 import { BatchPane } from './frigo/BatchPane';
+import { CataloguePane } from './frigo/CataloguePane';
 import './frigo/app.css';
 
-type Onglet = 'frigo' | 'recettes' | 'ia' | 'courses' | 'historique' | 'quiz' | 'batch';
+type Onglet = 'frigo' | 'recettes' | 'catalogue' | 'ia' | 'courses' | 'historique' | 'quiz' | 'batch';
 
 const ONGLETS: Array<{ id: Onglet; label: string }> = [
   { id: 'frigo', label: '🧺 Mon frigo' },
   { id: 'recettes', label: '🍳 Recettes' },
+  { id: 'catalogue', label: '📚 Catalogue +' },
   { id: 'ia', label: '🤖 Chef IA' },
   { id: 'courses', label: '🛒 Courses' },
   { id: 'historique', label: '📖 Historique' },
@@ -91,6 +93,7 @@ export function App() {
         <main className="fp-contenu">
           {onglet === 'frigo' && <FrigoPane ouvreRecette={() => setOnglet('recettes')} />}
           {onglet === 'recettes' && <RecettesPane />}
+          {onglet === 'catalogue' && <CataloguePane />}
           {onglet === 'ia' && <IaPane />}
           {onglet === 'courses' && <CoursesPane />}
           {onglet === 'historique' && <HistoriquePane />}

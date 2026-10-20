@@ -8,6 +8,7 @@
  */
 import type { Recette, Regime } from './types';
 import { LIBELLES_REGIME } from './types';
+import { catalogue, NOMBRE_MOTEUR } from './moteurRecettes';
 
 export const MODELE_MISTRAL = 'mistral-small-latest';
 export const URL_MISTRAL = 'https://api.mistral.ai/v1/chat/completions';
@@ -149,6 +150,38 @@ export function recetteLocale(ingredients: string[], regimes: Regime[]): Recette
   const choses = ingredients.length
     ? ingredients
     : ['oeuf', 'pates', 'huile'];
+  const norme = (s: string) => s.toLowerCase();
+
+  /* Le repli trempe dans le moteur combinatoire : une vraie recette cohérente
+     avec les régimes demandés, triée par affinité avec le frigo. */
+  const candidates = catalogue(NOMBRE_MOTEUR).filter((r) => regimes.every((f) => r.regimes.includes(f)));
+  const notees = candidates
+    .map((r) => ({
+      r,
+      score: r.ingredients.filter((i) =>
+        choses.some((c) => norme(i.nom).includes(norme(c)) || norme(c).includes(i.nom)),
+      ).length,
+    }))
+    .sort((a, b) => b.score - a.score);
+
+  if (notees.length) {
+    const gagnantes = notees.filter((n) => n.score === notees[0].score);
+    const choisie = gagnantes[Math.abs(Date.now()) % gagnantes.length].r;
+    return {
+      id: choisie.id,
+      nom: choisie.nom,
+      emoji: choisie.emoji,
+      temps: choisie.temps,
+      niveau: choisie.niveau,
+      categorie: choisie.categorie,
+      kcalParPortion: choisie.kcalParPortion,
+      ingredients: choisie.ingredients,
+      etapes: choisie.etapes,
+      regimes,
+      parIA: true,
+    };
+  }
+
   const titres = ['Le mille-feuille du frigo', 'La poêlée sauveur', 'Le grand brassage anti-gaspi'];
   const deterministe = Math.abs(choses.join('').length + regimes.length) % titres.length;
 
