@@ -34,7 +34,7 @@ const SYNONYMES: Record<string, string> = {
   'pommes de terre': 'pomme de terre',
 };
 
-const QUALIFICATIFS = ['frais', 'fraiche', 'fraiches', 'sec', 'seche', 'entier', 'entiere', 'entieres', 'de', 'du', 'des', 'en', 'a', 'la', 'rassis', 'tres', 'mur', 'mure', 'complet', ' blanc', 'râpe', 'rape'];
+const QUALIFICATIFS = ['frais', 'fraiche', 'fraiches', 'sec', 'seche', 'entier', 'entiere', 'entieres', 'de', 'du', 'des', 'en', 'a', 'la', 'rassis', 'tres', 'mur', 'mure', 'complet', 'blanc', 'rape', 'râpée'];
 
 /** Clé canonique d'un ingrédient (comparaison frigo ↔ recette). */
 export function cle(nom: string): string {
@@ -387,7 +387,7 @@ export const RECETTES: Recette[] = [
     etapes: [
       { texte: 'Lave et sèche très bien les herbes (l\u2019eau est l\u2019ennemie).', minutes: 5 },
       { texte: 'Écrase-les avec l\u2019ail, mets le tout en flacon propre.', minutes: 3 },
-      { texte: 'Couvre d\u2019huile, garde au frigo, utilise en sous quatorze jours.' },
+      { texte: 'Couvre d\u2019huile, garde au frigo, utilise dans les quinze jours.' },
     ],
   }),
   R({
@@ -508,9 +508,9 @@ export function substitutionsPour(nom: string): string[] {
 --------------------------------------------------------------------------- */
 export const ACCORDS: Record<string, { boisson: string; pourquoi: string; sansAlcool: string }> = {
   viande: { boisson: 'Un rouge léger type Bourgogne', pourquoi: 'Tannins souples qui accompagnent sans écraser.', sansAlcool: 'Eau pétillante citronnée' },
-  vege: { boisson: 'Un rosé bien frais', pourquoi: 'Léger pour ne pas masque légumes et herbes.', sansAlcool: 'Agrumes-menthe sans sucre' },
+  vege: { boisson: 'Un rosé bien frais', pourquoi: 'Léger pour ne pas masquer légumes et herbes.', sansAlcool: 'Agrume-menthe sans sucre' },
   pates: { boisson: 'Un rouge fruité légèrement frappé', pourquoi: 'L\u2019acidité équilibre l\u2019amidon et l\u2019huile.', sansAlcool: 'Thé vert citronné' },
-  riz: { boisson: 'Un blanc sec et rond', pourquoi: 'Rond pour suivre le riz., sec pour trancher.', sansAlcool: 'Kombucha redressé aux herbes' },
+  riz: { boisson: 'Un blanc sec et rond', pourquoi: 'Rond pour suivre le riz, sec pour trancher.', sansAlcool: 'Kombucha redressé aux herbes' },
   soupe: { boisson: 'Une eau aromatisée douce', pourquoi: 'Plat chaud, verre froid.', sansAlcool: 'Citron verveine figé en glaçons' },
   dessert: { boisson: 'Un cidre demi-sec', pourquoi: 'L\u2019acidité nettoie le sucre.', sansAlcool: 'Limonade maison peu sucrée' },
   salade: { boisson: 'Un blanc léger et vif', pourquoi: 'Vif pour suivre la vinaigrette.', sansAlcool: 'Eau frisée citron basilic' },
@@ -593,15 +593,15 @@ export const ASTUCES_CHEF: string[] = [
   'Congèle les blancs d\u2019œufs restants : un glaçon = un blanc, prêt pour une mousse.',
   'Les fanes de radis ou de carottes font des potages étonnants. Lave, congèle, réutilise.',
   'Le citron pressé tiède réveille les légumes fatigués : 15 minutes dans l\u2019eau citronnée.',
-  'Le marc de café séché déborde les odeurs du frigo et parfume un gâteau au cacao.',
+  'Le marc de café séché absorbe les odeurs du frigo et parfume un gâteau au cacao.',
   'Un yaourt vide se rince avec du lait : tu as déjà ta base de crêpe.',
   'Les herbes fatiguées en pâte : mixe avec soixante pour cent d\u2019huile, congèle en petits cubes.',
   'Le fromage sec se congèle très bien : il râpe encore mieux une fois durci.',
-  'Frites molles ? Une minute au four à 140 °C leur rend presque toute leur croquant.',
-  'Un pot de crème presque vide veut te rendre service : il se rince et se sers.',
-  'La purge conserve les meillures (et les moins bonnes) : goûte toujours avant de jeter.',
-  'Une épluchure de pomme de terre dégraisse la poêle en se brûlant, puis se composte.',
-  'Le sucre froid conserve ses cristaux aussi longtemps que ton attention au détail.',
+  'Frites molles ? Une minute au four à 140 °C leur rend presque tout leur croquant.',
+  'Un pot de crème presque fini se rince au lait : sauce improvisée pour les légumes du soir.',
+  'Dans le doute, goûte : la DLC protège du danger, la DDM parle de qualité seulement.',
+  'Une épluchure de pomme de terre huilée au four donne des chips de récupération.',
+  'Range le plus urgent devant dans le frigo : ce qui est vu se cuisine, ce qui est caché se perd.',
 ];
 
 /* ---------------------------------------------------------------------------
