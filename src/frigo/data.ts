@@ -1247,7 +1247,7 @@ export const ASTUCES_CHEF: string[] = [
   'Le fromage sec se congèle très bien : il râpe encore mieux une fois durci.',
   'Frites molles ? Une minute au four à 140 °C leur rend presque tout leur croquant.',
   'Un pot de crème presque fini se rince au lait : sauce improvisée pour les légumes du soir.',
-  'Dans le doute, goûte : la DLC protège du danger, la DDM parle de qualité seulement.',
+  'DLC (« à consommer jusqu\u2019au ») dépassée : on jette, c\u2019est une question de sécurité. DDM (« de préférence avant ») dépassée : on regarde, on sent, on goûte — si tout va bien, ça se mange.',
   'Une épluchure de pomme de terre huilée au four donne des chips de récupération.',
   'Range le plus urgent devant dans le frigo : ce qui est vu se cuisine, ce qui est caché se perd.',
 ];
@@ -1257,10 +1257,10 @@ export const ASTUCES_CHEF: string[] = [
 --------------------------------------------------------------------------- */
 export const RESTES_INSOLITES: Array<{ reste: string; idees: string[] }> = [
   { reste: 'Pain rassis', idees: ['Chapelure (mixe, congèle)', 'Pain perdu ou pudding', 'Panades pour boulettes'] },
-  { reste: 'Épluchures de légumes lavées', idees: ['Chips au four (peaux de pommes de terre, carottes)', 'Fond de potage', 'Huile aromatisée (sans oignon, sans ail crustré)'] },
+  { reste: 'Épluchures de légumes lavées', idees: ['Chips au four (peaux de pommes de terre, carottes)', 'Fond de potage', 'Bouillon de légumes maison'] },
   { reste: 'Fruits mous', idees: ['Compotes', 'Crumble des fruits mous', 'Pancakes des bananes trop mûres'] },
-  { reste: 'Marc de café', idees: ['Déodor gazoureux du frigo', 'Exfoliant culinaire noir', 'Engrais de jardin'] },
-  { reste: 'Coquilles d\u2019œuf', idees: ['Concassées pour le compost', 'Tisane de calcium (infusée bien chaude)', 'Drainage au fond d\u2019un pot'] },
+  { reste: 'Marc de café', idees: ['Absorbe les odeurs du frigo', 'Exfoliant culinaire noir', 'Engrais de jardin'] },
+  { reste: 'Coquilles d\u2019œuf', idees: ['Concassées pour le compost', 'Broyées au pied des plantes du jardin', 'Drainage au fond d\u2019un pot'] },
   { reste: 'Restes de fêtes', idees: ['Velouté des restes de fêtes', 'Croque-restes', 'Salade du placard']
   },
   { reste: 'Herbes fatiguées', idees: ['Beurre d\u2019herbes congelé', 'Huile aux herbes fatiguées', 'Pesto express au robot'] },
@@ -1292,9 +1292,9 @@ export const QUIZ: QuestionQuiz[] = [
   },
   {
     question: 'À quoi sert la DLC (à consommer jusqu\u2019au…) ?',
-    choix: ['À tout jet systématiquement à ma date', 'À sécuriser les produits les plus fragiles', 'À rien, c\u2019est du marketing'],
+    choix: ['À tout jeter le lendemain par principe', 'À sécuriser les produits les plus fragiles', 'À rien, c\u2019est du marketing'],
     bonne: 1,
-    explication: 'Lait, viandes, œufs frais se fient à la DLC. Les yaourts et conserves portent d\u2019autres mentions de qualité.',
+    explication: 'Viande, poisson, lait frais, plats préparés : après la DLC, on ne les mange plus. Pâtes, conserves ou biscuits portent une DDM (« de préférence avant ») : là, c\u2019est seulement une question de qualité.',
   },
   {
     question: 'Un yaourt de deux jours au-delà de sa mention de qualité se…',
