@@ -26,7 +26,7 @@
       // PWA : le service worker offre le mode hors-ligne (recettes locales).
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/frigoplacard_sw.js').catch(() => {
+          navigator.serviceWorker.register('./frigoplacard_sw.js').catch(() => {
             /* pas de SW : l'app reste fonctionnelle. */
           });
         });
