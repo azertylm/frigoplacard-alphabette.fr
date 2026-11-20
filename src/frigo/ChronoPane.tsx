@@ -127,7 +127,7 @@ export function ChronoPane() {
             {r.temps > minutes && <span>⚠️ un peu plus long que prévu</span>}
           </div>
           {sauves.length > 0 && <p className="fp-note">✅ Sauve : {sauves.join(', ')}.</p>}
-          {oublies.length > 0 && <p className="fp-note">Pas utilisé ici : {oublies.join(', ')} — à garder pour demain ou à congeler.</p>}
+          {oublies.length > 0 && <p className="fp-note">Pas utilisé dans cette recette : {oublies.join(', ')}.</p>}
           <h3>Il te faut</h3>
           <ul className="fp-chrono-liste">
             {r.ingredients.map((i, k) => (
