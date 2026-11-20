@@ -1016,3 +1016,24 @@ html[data-ab-density='large'] .fp-contenu {
 html[data-ab-density='compact'] .fp-contenu {
   font-size: 0.92rem;
 }
+
+/* ---- Anti-Gaspi chrono ---- */
+.fp-chrono-champs {
+  display: grid;
+  gap: 0.6rem;
+}
+.fp-chrono-champ {
+  display: grid;
+  gap: 0.25rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+.fp-chrono-champ .fp-champ {
+  min-height: 44px;
+  width: 100%;
+}
+.fp-chrono-liste {
+  margin: 0.3rem 0 0.8rem;
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}

@@ -7,6 +7,7 @@
  * l'entraînement. En cas d'absence de clé ou d'erreur : repli local garanti.
  */
 import type { Recette, Regime } from './types';
+import { RECETTES, memeIngredient } from './data';
 import { LIBELLES_REGIME } from './types';
 import { catalogue, NOMBRE_MOTEUR } from './moteurRecettes';
 
@@ -241,4 +242,78 @@ export function enRecette(ia: RecetteIA): Recette {
     ingredients: ia.ingredients,
     etapes: ia.etapes,
   };
+}
+
+/* ---------------------------------------------------------------------------
+   Mode « Anti-Gaspi chrono » : 3 ingrédients qui périment ce soir + le temps
+   disponible → une recette directe, courte, sans blabla. Mistral si une clé
+   est là (consigne serrée sur le temps), sinon le meilleur plat du catalogue
+   local qui tient dans le temps imparti.
+--------------------------------------------------------------------------- */
+
+const SYSTEME_CHRONO = `Tu es le Chef Mistral de Frigo-Placard, en MODE ANTI-GASPI CHRONO.
+L'utilisateur a des ingrédients qui périment CE SOIR et très peu de temps. Donne UNE recette directe, sans blabla :
+- temps total (préparation + cuisson) inférieur ou égal au temps donné, sans tricher ;
+- les ingrédients fournis sont utilisés en priorité (tous, si c'est mangeable ensemble) ;
+- 3 à 5 étapes, une phrase courte chacune, à l'impératif, sans anecdote ni conseil superflu ;
+- seulement des produits de placard courants en plus (sel, poivre, huile, beurre, farine, œufs, pâtes, riz).
+Réponds UNIQUEMENT avec un objet JSON valable, schéma : {"nom":"…","emoji":"…","categorie":"…","temps":10,"niveau":"debutant","kcalParPortion":400,"regimes":[],"ingredients":[{"nom":"…","qte":1,"unite":"…"}],"etapes":[{"texte":"…","minutes":5,"labelMinuteur":"cuisson"}]}`;
+
+/** Recette chrono via Mistral (BYOK). */
+async function chronoViaMistral(cle: string, ingredients: string[], minutes: number, regimes: Regime[]): Promise<RecetteIA> {
+  const reponse = await fetch(URL_MISTRAL, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${cle}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: MODELE_MISTRAL,
+      temperature: 0.5,
+      response_format: { type: 'json_object' },
+      messages: [
+        { role: 'system', content: SYSTEME_CHRONO },
+        { role: 'user', content: `Ingrédients qui périment ce soir : ${ingredients.join(', ')}.\nTemps disponible : ${minutes} minutes, tout compris.${regimes.length ? `\nRégimes à respecter STRICTEMENT : ${regimes.map((r) => LIBELLES_REGIME[r]).join(', ')}.` : ''}` },
+      ],
+    }),
+  });
+  if (reponse.status === 401) throw new Error('Clé Mistral refusée (401).');
+  if (!reponse.ok) throw new Error(`Mistral a répondu ${reponse.status}.`);
+  const json = await reponse.json();
+  const texte = json?.choices?.[0]?.message?.content;
+  if (!texte) throw new Error('Réponse Mistral vide.');
+  const r = normalise(JSON.parse(texte), String(json.id ?? 'chrono'));
+  r.etapes = r.etapes.slice(0, 5);
+  return r;
+}
+
+/** Repli local : la recette du catalogue (maison + moteur) qui tient dans le temps et sauve le plus d'ingrédients. */
+export function chronoLocale(ingredients: string[], minutes: number, regimes: Regime[]): RecetteIA | null {
+  const voulus = ingredients.map((x) => x.trim()).filter(Boolean);
+  const notees = [...RECETTES, ...catalogue(NOMBRE_MOTEUR)]
+    .filter((r) => r.temps <= minutes && regimes.every((f) => r.regimes.includes(f)))
+    .map((r) => ({ r, score: voulus.filter((v) => r.ingredients.some((i) => memeIngredient(i.nom, v))).length }))
+    .filter((n) => n.score > 0)
+    .sort((a, b) => b.score - a.score || a.r.etapes.length - b.r.etapes.length || a.r.temps - b.r.temps);
+  const choisie = notees[0]?.r;
+  if (!choisie) return null;
+  return {
+    id: choisie.id, nom: choisie.nom, emoji: choisie.emoji, temps: choisie.temps, niveau: choisie.niveau, categorie: choisie.categorie,
+    kcalParPortion: choisie.kcalParPortion, ingredients: choisie.ingredients, etapes: choisie.etapes, regimes: choisie.regimes, parIA: true,
+  };
+}
+
+/** Point d'entrée du mode chrono : Mistral si possible, catalogue local sinon (et on dit lequel). */
+export async function genererChrono(
+  ingredients: string[],
+  minutes: number,
+  regimes: Regime[],
+): Promise<{ recette: RecetteIA | null; source: 'mistral' | 'local'; erreur?: string }> {
+  const cle = lireCle() ?? '';
+  if (cle) {
+    try {
+      return { recette: await chronoViaMistral(cle, ingredients, minutes, regimes), source: 'mistral' };
+    } catch (e) {
+      const erreur = e instanceof Error ? e.message : 'Mistral injoignable.';
+      return { recette: chronoLocale(ingredients, minutes, regimes), source: 'local', erreur };
+    }
+  }
+  return { recette: chronoLocale(ingredients, minutes, regimes), source: 'local' };
 }
